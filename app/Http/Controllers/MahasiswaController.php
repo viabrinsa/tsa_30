@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 
@@ -71,7 +72,7 @@ class MahasiswaController extends Controller
      */
     public function edit($Nim)
     {
-        $Mahasiswa = DB::table('mahasiswa')->where('nim', $nim)->first();
+        $Mahasiswa = DB::table('mahasiswa')->where('nim', $Nim)->first();
         return view('mahasiswa.edit', compact('Mahasiswa'));
     }
 
@@ -108,5 +109,9 @@ class MahasiswaController extends Controller
         Mahasiswa::find($Nim)->delete();
         return redirect()->route('mahasiswa.index')
         ->with('success', 'Mahasiswa Berhasil Dihapus');
+    }
+
+    public function mahasiswa(){
+        return view('/mahasiswa');
     }
 }
